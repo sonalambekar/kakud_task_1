@@ -36,7 +36,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-secondary/50 to-mint-light/30 pt-20 pb-8 overflow-hidden">
+    <footer className="relative bg-white pt-20 pb-8 overflow-hidden">
       {/* Top gradient line */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-teal to-emerald" />
 

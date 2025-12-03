@@ -47,7 +47,7 @@ const ProblemsSolved = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={ref} className="py-24 bg-background relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-white relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--mint-light))_0%,transparent_50%)] opacity-40" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent))_0%,transparent_50%)] opacity-30" />

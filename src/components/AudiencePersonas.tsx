@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { GraduationCap, FlaskConical, Building, Factory, Globe } from "lucide-react";
+import { GraduationCap, FlaskConical, Building, Factory, Globe, Lightbulb } from "lucide-react";
 
 import studentsImg from "@/assets/students.jpg";
 import researcherImg from "@/assets/researcher.jpg";
@@ -45,6 +45,13 @@ const personas = [
     benefit: "Explore scientific discoveries, attend public lectures, and engage with India's research community.",
     image: publicImg,
   },
+  {
+    icon: Lightbulb,
+    title: "Innovators",
+    tagline: "Transform Ideas into Reality",
+    benefit: "Prototype your innovations, access funding opportunities, and connect with investors and mentors.",
+    image: companyImg,
+  },
 ];
 
 const AudiencePersonas = () => {
@@ -52,7 +59,7 @@ const AudiencePersonas = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-b from-secondary/30 to-background relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute w-full h-full" style={{
