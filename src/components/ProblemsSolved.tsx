@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Lock, Network, Eye, UserSearch, BookX } from "lucide-react";
+import { Lock, Network, Eye, UserSearch, BookX, Shield, Zap } from "lucide-react";
 
 const problems = [
   {
@@ -29,11 +29,22 @@ const problems = [
     title: "Scattered Knowledge",
     description: "Centralizing scientific publications, events, and educational content in one accessible platform.",
   },
+  {
+    icon: Shield,
+    title: "Data Security Concerns",
+    description: "Providing secure infrastructure for sensitive research data sharing and collaboration.",
+  },
+  {
+    icon: Zap,
+    title: "Slow Innovation Cycles",
+    description: "Accelerating the path from research discovery to real-world application and commercialization.",
+  },
 ];
 
 const ProblemsSolved = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <section ref={ref} className="py-24 bg-background relative overflow-hidden">
@@ -46,7 +57,7 @@ const ProblemsSolved = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-teal/10 text-teal text-sm font-semibold mb-4">
             Challenges We Address
@@ -59,29 +70,50 @@ const ProblemsSolved = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {problems.map((problem, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
-            >
-              <div className="h-full rounded-3xl p-6 bg-white/60 backdrop-blur-xl border border-white/40 shadow-card transition-all duration-500 hover:shadow-glow hover:scale-105 hover:bg-white/80">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-mint-light to-accent flex items-center justify-center mb-5 group-hover:shadow-glow transition-shadow duration-500">
-                  <problem.icon className="w-6 h-6 text-primary" />
+        {/* Horizontal Scrolling Cards */}
+        <div className="relative">
+          {/* Gradient overlays for scroll indication */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          
+          <div 
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto pb-6 pt-2 px-4 -mx-4 scrollbar-hide snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {problems.map((problem, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group flex-shrink-0 snap-center"
+              >
+                <div className="w-[300px] md:w-[340px] h-full rounded-3xl p-6 bg-white/60 backdrop-blur-xl border border-white/40 shadow-card transition-all duration-500 hover:shadow-glow hover:scale-105 hover:bg-white/80">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-mint-light to-accent flex items-center justify-center mb-5 group-hover:shadow-glow group-hover:from-primary group-hover:to-teal transition-all duration-500">
+                    <problem.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors duration-500" />
+                  </div>
+                  <h3 className="text-lg font-display font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                    {problem.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {problem.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-display font-bold text-foreground mb-2">
-                  {problem.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {problem.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
+
+        {/* Scroll hint */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.8 }}
+          className="text-center text-muted-foreground text-sm mt-4"
+        >
+          ← Scroll to explore more →
+        </motion.p>
       </div>
     </section>
   );

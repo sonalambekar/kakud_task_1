@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { GraduationCap, Microscope, Building2, Briefcase, Users } from "lucide-react";
+import { GraduationCap, Microscope, Building2, Briefcase, Users, Award } from "lucide-react";
 
 import studentsImg from "@/assets/students.jpg";
 import researcherImg from "@/assets/researcher.jpg";
@@ -40,6 +40,12 @@ const cards = [
     description: "Access scientific events, publications, and educational resources to stay informed about research breakthroughs.",
     image: publicImg,
   },
+  {
+    icon: Award,
+    title: "Institutions",
+    description: "Partner with NBRO to enhance your research output, gain visibility, and contribute to India's scientific growth.",
+    image: laboratoryImg,
+  },
 ];
 
 const WhatNBRORepresents = () => {
@@ -70,7 +76,7 @@ const WhatNBRORepresents = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((card, index) => (
             <motion.div
               key={index}
