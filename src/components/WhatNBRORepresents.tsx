@@ -3,36 +3,42 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { GraduationCap, Microscope, Building2, Briefcase, Users } from "lucide-react";
 
+import studentsImg from "@/assets/students.jpg";
+import researcherImg from "@/assets/researcher.jpg";
+import laboratoryImg from "@/assets/laboratory.jpg";
+import companyImg from "@/assets/company.jpg";
+import publicImg from "@/assets/public.jpg";
+
 const cards = [
   {
     icon: GraduationCap,
     title: "Students",
     description: "Discover research exposure opportunities, internships, and mentorship programs to kickstart your scientific journey.",
-    gradient: "from-emerald/20 to-teal/20",
+    image: studentsImg,
   },
   {
     icon: Microscope,
     title: "Researchers",
     description: "Access cutting-edge laboratories, scientific literature, and collaborative networks to advance your research.",
-    gradient: "from-teal/20 to-primary/20",
+    image: researcherImg,
   },
   {
     icon: Building2,
     title: "Laboratories",
     description: "Showcase your infrastructure, attract talent, and connect with industry partners for impactful collaborations.",
-    gradient: "from-primary/20 to-mint/20",
+    image: laboratoryImg,
   },
   {
     icon: Briefcase,
     title: "Companies",
     description: "Connect with brilliant researchers, discover innovations, and find the talent that drives your R&D forward.",
-    gradient: "from-mint/20 to-lime/10",
+    image: companyImg,
   },
   {
     icon: Users,
     title: "General Public",
     description: "Access scientific events, publications, and educational resources to stay informed about research breakthroughs.",
-    gradient: "from-lime/10 to-emerald/20",
+    image: publicImg,
   },
 ];
 
@@ -71,17 +77,31 @@ const WhatNBRORepresents = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group"
             >
-              <div className={`glass-card-hover h-full rounded-3xl p-6 bg-gradient-to-br ${card.gradient}`}>
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-teal flex items-center justify-center mb-5 shadow-soft">
-                  <card.icon className="w-7 h-7 text-primary-foreground" />
+              <div className="h-full rounded-3xl overflow-hidden bg-white/40 backdrop-blur-xl border border-white/50 shadow-card transition-all duration-500 hover:shadow-glow hover:-translate-y-3 hover:bg-white/60 hover:border-primary/30">
+                {/* Image */}
+                <div className="relative h-40 overflow-hidden">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/20 to-transparent" />
+                  <div className="absolute bottom-3 left-3 w-12 h-12 rounded-xl bg-white/90 backdrop-blur-md border border-white/50 flex items-center justify-center shadow-soft group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-teal transition-all duration-500">
+                    <card.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-500" />
+                  </div>
                 </div>
-                <h3 className="text-xl font-display font-bold text-foreground mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {card.description}
-                </p>
+                
+                {/* Content */}
+                <div className="p-5">
+                  <h3 className="text-xl font-display font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                    {card.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {card.description}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

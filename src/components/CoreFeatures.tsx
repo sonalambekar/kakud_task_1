@@ -4,41 +4,47 @@ import { useRef } from "react";
 import { Search, Building2, Users, BookOpen, Lightbulb, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import studentsImg from "@/assets/students.jpg";
+import researcherImg from "@/assets/researcher.jpg";
+import laboratoryImg from "@/assets/laboratory.jpg";
+import companyImg from "@/assets/company.jpg";
+import publicImg from "@/assets/public.jpg";
+
 const features = [
   {
     icon: Search,
     title: "Research Opportunity Board",
     description: "Discover internships, fellowships, grants, and research positions from institutions across India. Filter by field, location, and experience level.",
     highlights: ["Real-time listings", "Smart matching", "Application tracking"],
-    align: "left",
+    image: studentsImg,
   },
   {
     icon: Building2,
     title: "Lab Marketplace",
     description: "Browse state-of-the-art laboratories, their equipment, expertise, and availability. Book facilities or request collaboration directly.",
     highlights: ["Equipment catalog", "Virtual tours", "Direct booking"],
-    align: "right",
+    image: laboratoryImg,
   },
   {
     icon: Users,
     title: "Collaboration Tools",
     description: "Find research partners, join projects, and communicate seamlessly. Build your network with researchers who share your interests.",
     highlights: ["Project matching", "Secure messaging", "Team workspaces"],
-    align: "left",
+    image: researcherImg,
   },
   {
     icon: BookOpen,
     title: "Knowledge Hub",
     description: "Access a curated library of research papers, publications, events, and educational resources all in one centralized platform.",
     highlights: ["Open access papers", "Event calendar", "Learning paths"],
-    align: "right",
+    image: publicImg,
   },
   {
     icon: Lightbulb,
     title: "Innovation Discovery",
     description: "Companies can explore breakthrough research, emerging technologies, and innovative solutions from India's brightest minds.",
     highlights: ["Patent database", "Tech scouting", "Partnership portal"],
-    align: "left",
+    image: companyImg,
   },
 ];
 
@@ -66,14 +72,14 @@ const CoreFeatures = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-24">
+        <div className="space-y-20">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: feature.align === "left" ? -50 : 50 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: index * 0.15 }}
-              className={`flex flex-col ${feature.align === "right" ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-12`}
+              className={`flex flex-col ${index % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-12`}
             >
               {/* Content */}
               <div className="flex-1 space-y-6">
@@ -90,7 +96,7 @@ const CoreFeatures = () => {
                   {feature.highlights.map((highlight, i) => (
                     <span
                       key={i}
-                      className="px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-medium"
+                      className="px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm border border-border/50 text-secondary-foreground text-sm font-medium shadow-soft"
                     >
                       {highlight}
                     </span>
@@ -102,14 +108,17 @@ const CoreFeatures = () => {
                 </Button>
               </div>
 
-              {/* Visual */}
+              {/* Visual with Image */}
               <div className="flex-1 w-full max-w-lg">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-teal/20 rounded-3xl blur-2xl" />
-                  <div className="relative glass-card rounded-3xl p-8 aspect-[4/3] flex items-center justify-center">
-                    <div className="w-full h-full bg-gradient-to-br from-mint-light/50 to-accent/50 rounded-2xl flex items-center justify-center">
-                      <feature.icon className="w-24 h-24 text-primary/30" />
-                    </div>
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-teal/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
+                  <div className="relative rounded-3xl overflow-hidden bg-white/40 backdrop-blur-xl border border-white/50 shadow-card group-hover:shadow-glow transition-all duration-500">
+                    <img
+                      src={feature.image}
+                      alt={feature.title}
+                      className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
                   </div>
                 </div>
               </div>
