@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#98D8C8"/>
+  
+  <!-- DNA Helix -->
+  <g stroke="#2D5A4F" stroke-width="2" fill="none" stroke-linecap="round">
+    <!-- Left strand -->
+    <path d="M 20 10 Q 15 20 20 30 Q 25 40 20 50"/>
+    <!-- Right strand -->
+    <path d="M 44 10 Q 49 20 44 30 Q 39 40 44 50"/>
+    <!-- Connecting bonds -->
+    <line x1="20" y1="15" x2="44" y2="15"/>
+    <line x1="22" y1="25" x2="42" y2="25"/>
+    <line x1="20" y1="35" x2="44" y2="35"/>
+    <line x1="22" y1="45" x2="42" y2="45"/>
+  </g>
+</svg>
